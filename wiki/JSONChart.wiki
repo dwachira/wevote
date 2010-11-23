@@ -1,5 +1,3 @@
-JSONChart
-
 #summary JSON Structure for Chart
 
 = JSON Structure =
