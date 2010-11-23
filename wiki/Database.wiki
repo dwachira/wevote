@@ -1,0 +1,5 @@
+#summary Tables Relations
+
+= Database Tables =
+
+[http://wevote.googlecode.com/svn/trunk/wevote_website/web/images/Images%20BackUp/Database.png]
