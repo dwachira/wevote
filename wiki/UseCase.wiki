@@ -1,0 +1,5 @@
+#summary Actors Relations
+
+= Use Case Diagram =
+
+[http://wevote.googlecode.com/svn/trunk/wevote_website/web/images/Images%20BackUp/UseCase.png]
