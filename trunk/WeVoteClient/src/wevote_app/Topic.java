@@ -125,45 +125,86 @@ public class Topic implements Serializable, Comparable<Topic> {
      */
     public void uploadPoll() {
         MySQL foo = new MySQL();
-        // Insert into pool table
 
-        Calendar cal = Calendar.getInstance();
-        int day = cal.get(Calendar.DATE);
-        int month = cal.get(Calendar.MONTH) + 1;
-        int year = cal.get(Calendar.YEAR);
-        int hour = cal.get(Calendar.HOUR_OF_DAY);
-        int min = cal.get(Calendar.MINUTE);
-        int sec = cal.get(Calendar.SECOND);
+        // if topic presentet - not sent it again
+        ArrayList<ArrayList> is_topic_presented = foo.Select("SELECT id FROM `pool` WHERE id = " + this.getPoolID(MainFrame.currentTopicID) + " LIMIT 1");
 
+        try {
+            if (Integer.parseInt(is_topic_presented.get(0).get(0).toString()) > 0) {
+                ArrayList<ArrayList> pool_id = foo.Select("SELECT MAX(id) FROM `pool` LIMIT 1");
+                
+                for (int i = 0; i < this.getPollArrayList().size(); i++) {
+                    ArrayList<ArrayList> is_question_presented = foo.Select("SELECT id FROM `question` WHERE id = " + this.getQuestionID(i) + " LIMIT 1");
 
-        foo.Update("INSERT INTO `pool` (title, date) VALUE ('"
-            + this.getTitle() + "', '"
-            + year + "-"
-            + month + "-"
-            + day + " " + hour + ":" + min +  ":" + sec + "');");
+                    try {
+                        Integer.parseInt(is_question_presented.get(0).get(0).toString());
+                    } catch (Exception ex) {
+                        foo.Update("INSERT INTO `question` (pool_id, title, question) VALUE ("
+                            + pool_id.get(0).get(0) + ", '"
+                            + this.getPollArrayList().get(i).getQuestion() + "', '"
+                            + this.getPollArrayList().get(i).getQuestionString() + "');");
 
-        // Insert questions into question table
-        ArrayList<ArrayList> pool_id = foo.Select("SELECT MAX(id) FROM `pool` LIMIT 1");
-        this.setPoolID(Integer.parseInt(String.valueOf(pool_id.get(0).get(0))));
+                        // Insert answers into pool_answer table
+                        ArrayList<ArrayList> question_id = foo.Select("SELECT MAX(id) FROM `question` LIMIT 1");
+                        this.setQuestionID(Integer.parseInt(String.valueOf(question_id.get(0).get(0))));
 
-        for (int i = 0; i < this.getPollArrayList().size(); i++) {
-            foo.Update("INSERT INTO `question` (pool_id, title, question) VALUE ("
-                + pool_id.get(0).get(0) + ", '"
-                + this.getPollArrayList().get(i).getQuestion() + "', '"
-                + this.getPollArrayList().get(i).getQuestionString() + "');");
+                        for (int j = 0; j < this.getPollArrayList().get(i).getAnswers().size(); j++) {
+                            foo.Update("INSERT INTO `pool_answer` (question_id, answer) VALUE ("
+                                + question_id.get(0).get(0) + ", '"
+                                + this.getPollArrayList().get(i).getAnswers().get(j) + "');");
 
-            // Insert answers into pool_answer table
-            ArrayList<ArrayList> question_id = foo.Select("SELECT MAX(id) FROM `question` LIMIT 1");
-            this.setQuestionID(Integer.parseInt(String.valueOf(question_id.get(0).get(0))));
+                            ArrayList<ArrayList> answer_id = foo.Select("SELECT MAX(id) FROM `pool_answer` LIMIT 1");
+                            this.setAnswerID(Integer.parseInt(String.valueOf(answer_id.get(0).get(0))));
+                            this.pollArrayList.get(i).setAnswerID(Integer.parseInt(String.valueOf(answer_id.get(0).get(0))));
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // Insert into pool table
+            Calendar cal = Calendar.getInstance();
+            int day = cal.get(Calendar.DATE);
+            int month = cal.get(Calendar.MONTH) + 1;
+            int year = cal.get(Calendar.YEAR);
+            int hour = cal.get(Calendar.HOUR_OF_DAY);
+            int min = cal.get(Calendar.MINUTE);
+            int sec = cal.get(Calendar.SECOND);
 
-            for (int j = 0; j < this.getPollArrayList().get(i).getAnswers().size(); j++) {
-                foo.Update("INSERT INTO `pool_answer` (question_id, answer) VALUE ("
-                    + question_id.get(0).get(0) + ", '"
-                    + this.getPollArrayList().get(i).getAnswers().get(j) + "');");
+            foo.Update("INSERT INTO `pool` (title, date) VALUE ('"
+                + this.getTitle() + "', '"
+                + year + "-"
+                + month + "-"
+                + day + " " + hour + ":" + min +  ":" + sec + "');");
 
-                ArrayList<ArrayList> answer_id = foo.Select("SELECT MAX(id) FROM `pool_answer` LIMIT 1");
-                this.setAnswerID(Integer.parseInt(String.valueOf(answer_id.get(0).get(0))));
-                this.pollArrayList.get(i).setAnswerID(Integer.parseInt(String.valueOf(answer_id.get(0).get(0))));
+            // Insert questions into question table
+            ArrayList<ArrayList> pool_id = foo.Select("SELECT MAX(id) FROM `pool` LIMIT 1");
+            this.setPoolID(Integer.parseInt(String.valueOf(pool_id.get(0).get(0))));
+
+            for (int i = 0; i < this.getPollArrayList().size(); i++) {
+                ArrayList<ArrayList> is_question_presented = foo.Select("SELECT id FROM `question` WHERE id = " + this.getQuestionID(i) + " LIMIT 1");
+
+                try {
+                    Integer.parseInt(is_question_presented.get(0).get(0).toString());
+                } catch (Exception ex) {
+                    foo.Update("INSERT INTO `question` (pool_id, title, question) VALUE ("
+                        + pool_id.get(0).get(0) + ", '"
+                        + this.getPollArrayList().get(i).getQuestion() + "', '"
+                        + this.getPollArrayList().get(i).getQuestionString() + "');");
+
+                    // Insert answers into pool_answer table
+                    ArrayList<ArrayList> question_id = foo.Select("SELECT MAX(id) FROM `question` LIMIT 1");
+                    this.setQuestionID(Integer.parseInt(String.valueOf(question_id.get(0).get(0))));
+
+                    for (int j = 0; j < this.getPollArrayList().get(i).getAnswers().size(); j++) {
+                        foo.Update("INSERT INTO `pool_answer` (question_id, answer) VALUE ("
+                            + question_id.get(0).get(0) + ", '"
+                            + this.getPollArrayList().get(i).getAnswers().get(j) + "');");
+
+                        ArrayList<ArrayList> answer_id = foo.Select("SELECT MAX(id) FROM `pool_answer` LIMIT 1");
+                        this.setAnswerID(Integer.parseInt(String.valueOf(answer_id.get(0).get(0))));
+                        this.pollArrayList.get(i).setAnswerID(Integer.parseInt(String.valueOf(answer_id.get(0).get(0))));
+                    }
+                }
             }
         }
     }
@@ -184,7 +225,11 @@ public class Topic implements Serializable, Comparable<Topic> {
      * @return id in pool_answer table
      */
     public Integer getAnswerID(int i) {
-        return this.answerID.get(i);
+        try {
+            return this.answerID.get(i);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     /**
@@ -203,7 +248,11 @@ public class Topic implements Serializable, Comparable<Topic> {
      * @return id in question table
      */
     public Integer getQuestionID(int i) {
-        return this.questionID.get(i);
+        try {
+            return this.questionID.get(i);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     /**
@@ -222,7 +271,11 @@ public class Topic implements Serializable, Comparable<Topic> {
      * @return id in pool table
      */
     public Integer getPoolID(int i) {
-        return this.poolID.get(i);
+        try {
+            return this.poolID.get(i);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
 }

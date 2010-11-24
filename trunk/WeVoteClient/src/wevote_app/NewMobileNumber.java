@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 
-//TODO disable auresizing
 
 /*
  * NewPoll.java
@@ -209,24 +208,20 @@ public class NewMobileNumber extends javax.swing.JFrame {
 
                     birthDate = df.parse(birthDayStr);
 
-                }
+                    String mobNum = jTextField1.getText();
 
-            
-            String mobNum = jTextField1.getText();
-
-            if (mobNum.length() == 13) {
-                // 13 - size of mobile phone in Finland
-                if (mobNum.substring(0, 1).equals("+")){
-                    //System.out.println(mobNum.substring(1));
-                    if (Double.parseDouble(mobNum.substring(1)) >= 0) {
-                        Main.addMobileNumber(mobNum, gender, birthDate);
-                        this.setVisible(false);
-                        Main.respondentsRegistered++;
+                    if (mobNum.length() == 13) {
+                        // 13 - size of mobile phone in Finland
+                        if (mobNum.substring(0, 1).equals("+")){
+                            //System.out.println(mobNum.substring(1));
+                            if (Double.parseDouble(mobNum.substring(1)) >= 0) {
+                                Main.addMobileNumber(mobNum, gender, birthDate);
+                                this.setVisible(false);
+                                Main.respondentsRegistered++;
+                            }
+                        }
                     }
                 }
-            }
-            
-
 
             } catch (Exception e) {
                 //e.printStackTrace();

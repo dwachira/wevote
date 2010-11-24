@@ -3,8 +3,6 @@
  * and open the template in the editor.
  */
 
-//TODO disable auresizing
-
 /*
  * NewPoll.java
  *
@@ -36,21 +34,19 @@ public class NewPoll extends javax.swing.JFrame {
         if (editStatePoll) {
             this.setTitle("Edit Poll");
             jButton3.setVisible(false);
-            //System.out.println("EDIT");
 
-            //TODO Disable add Button if topic Id is not vlid or Question name is wrong or there are no answers
             jTextField1.setText(Main.topicArray.get(MainFrame.currentTopicID).getPollArrayList().get(MainFrame.currentPollID).getQuestion()); //adding title of the topic to edit
             try {
-                jTextField2.setText(Main.topicArray.get(MainFrame.currentTopicID).getPollArrayList().get(MainFrame.currentPollID).getAnswers().get(0)); //adding title of the topic to edit
+                jTextField2.setText(Main.topicArray.get(MainFrame.currentTopicID).getPollArrayList().get(MainFrame.currentPollID).getAnswers().get(0).substring(2)); //adding title of the topic to edit
             } catch (Exception e) {}
             try {
-                jTextField3.setText(Main.topicArray.get(MainFrame.currentTopicID).getPollArrayList().get(MainFrame.currentPollID).getAnswers().get(1)); //adding title of the topic to edit
+                jTextField3.setText(Main.topicArray.get(MainFrame.currentTopicID).getPollArrayList().get(MainFrame.currentPollID).getAnswers().get(1).substring(2)); //adding title of the topic to edit
             } catch (Exception e) {}
             try {
-                jTextField4.setText(Main.topicArray.get(MainFrame.currentTopicID).getPollArrayList().get(MainFrame.currentPollID).getAnswers().get(2)); //adding title of the topic to edit
+                jTextField4.setText(Main.topicArray.get(MainFrame.currentTopicID).getPollArrayList().get(MainFrame.currentPollID).getAnswers().get(2).substring(2)); //adding title of the topic to edit
             } catch (Exception e) {}
             try {
-                jTextField5.setText(Main.topicArray.get(MainFrame.currentTopicID).getPollArrayList().get(MainFrame.currentPollID).getAnswers().get(3)); //adding title of the topic to edit
+                jTextField5.setText(Main.topicArray.get(MainFrame.currentTopicID).getPollArrayList().get(MainFrame.currentPollID).getAnswers().get(3).substring(2)); //adding title of the topic to edit
             } catch (Exception e) {}
 
             editStatePoll = false; // set back to creating New
@@ -500,7 +496,6 @@ public class NewPoll extends javax.swing.JFrame {
     }
 
     private ArrayList<String> makeAnswerString() {
-        //TODO add variation pointers (A. 1. ... )
         ArrayList<String> answers = new ArrayList<String>();
         if (!jTextField2.getText().equals("")) {
             String ansStr = jTextField9.getText() + jTextField2.getText();
@@ -533,12 +528,8 @@ public class NewPoll extends javax.swing.JFrame {
 
 
         if (newID!= MainFrame.currentTopicID) {
-            //System.out.println("SIZE1 " + Main.topicArray.get(newID).getPollArrayList().size());
             Main.topicArray.get(newID).getPollArrayList().add(Main.topicArray.get(MainFrame.currentTopicID).getPollArrayList().get(MainFrame.currentPollID)); // move poll to a new topic id needed
             Main.topicArray.get(MainFrame.currentTopicID).getPollArrayList().remove(MainFrame.currentPollID);
-            //System.out.println("SIZE1 " + Main.topicArray.get(newID).getPollArrayList().size());
-            //System.out.println("ADDED");
-            //TODO make moving of poll work
         }
 
         Main.topicArray.get(MainFrame.currentTopicID).getPollArrayList().get(MainFrame.currentPollID).makeQuestionString();

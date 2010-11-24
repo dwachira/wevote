@@ -13,7 +13,6 @@ public class SendPolls implements Runnable {
         do {
             try {
                 Thread.sleep(1000);
-                //System.out.println("SENDING POLLS THREAD");
 
                 SendMessage sendMsg = new SendMessage();
                 try
@@ -26,13 +25,11 @@ public class SendPolls implements Runnable {
                 {
                         //e.printStackTrace();
                 }
-                //Thread.sleep(1000); //TODO choose sleep time
             } catch (Exception ex) {
                 //ex.printStackTrace();
             }
         } while(sendPollsVar);
 
-        //System.out.println("BEFORE FETCHING ANSWERS");
 
         Runnable threadJob = new FetchAnswers();
         fetchingAnswersThread = new Thread(threadJob);
@@ -40,6 +37,5 @@ public class SendPolls implements Runnable {
         fetchingAnswersThread.start();
         Main.frame.refreshLog("Fetching answers has been started.");
 
-        //System.out.println("AFTER FETCHIGN ASNWERS");
     }
 }

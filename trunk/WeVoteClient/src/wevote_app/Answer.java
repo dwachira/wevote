@@ -46,7 +46,6 @@ public class Answer implements Serializable {
      * @param mobileNumberSent
      */
     public void addFromThread(String answer, MobileNumber mobileNumberSent) {
-        //TODO check if it is needed
         setAnswer(answer);
         this.mobileNumberSent = mobileNumberSent;
     }
@@ -77,17 +76,10 @@ public class Answer implements Serializable {
     public void uploadAnswer() {
         MySQL foo = new MySQL();
 
-        //System.out.println("mobileNumberSent.getPhoneNumber()"+mobileNumberSent.getPhoneNumber());
-
         ArrayList<ArrayList> result = foo.Select("SELECT id FROM `user` WHERE mobile_number = '" + mobileNumberSent.getPhoneNumber() + "' LIMIT 1");
-
-        //System.out.println("result.get(0).get(0): "+result.get(0).get(0).toString());
 
         for (int i = 0; i < Main.currentOptions.size(); i++) {
             if (this.getAnswer().equals(Main.currentOptions.get(i))) {
-
-                //System.out.println("Main.pollSent.getAnswerID(i)" + Main.pollSent.getAnswerID(i));
-
                 foo.Update("INSERT INTO `user_answer` (user_id, answer_id) VALUE ("
                     + result.get(0).get(0).toString() + ","
                     + Main.pollSent.getAnswerID(i) + ");");
@@ -111,9 +103,9 @@ public class Answer implements Serializable {
      */
     public void checkRegistration() {
         MySQL foo = new MySQL();
-        //System.out.println("1");
+
         ArrayList<ArrayList> result = foo.Select("SELECT count(id) FROM `user` WHERE mobile_number = '" + mobileNumberSent.getPhoneNumber() + "' LIMIT 1");
-//System.out.println("2: "+result.get(0).get(0));
+
         if (result.get(0).get(0).equals("0")) {
             String gender = "unknown";
             if (mobileNumberSent.getGender() == 'm' || mobileNumberSent.getGender() == 'M')

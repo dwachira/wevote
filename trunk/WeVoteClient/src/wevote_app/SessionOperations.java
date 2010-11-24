@@ -100,6 +100,13 @@ public class SessionOperations {
         Main.mobileNumberArray = new ArrayList<MobileNumber>();
         Main.topicArray = new ArrayList<Topic>();
         Main.answerArray = new ArrayList<Answer>();
+
+        Main.respondentsRegistered = 0;
+        Main.answersRegistered = 0;
+
+        Main.frame.setAnswersReceived("0");
+        Main.frame.setRespondentsRegistered("0");
+        //TODO test
         
         Main.frame.lastOpenedSessionFileName = null;
         Main.frame.currentPollID = -1;

@@ -59,7 +59,6 @@ public class Main {
      */
     public static Poll pollSent = new Poll();
 
-    //TODO see what it does and maybe delete it
     /**
      *
      */
@@ -85,7 +84,7 @@ public class Main {
      * Default COM port (it is later changed by calling CommTest that looks
      * for a connected modem.
      */
-    public static String commPort = "COM1"; //TODO using commTest change to appropriate one
+    public static String commPort = "COM1"; 
     /**
      * Clockrate
      */
@@ -219,16 +218,32 @@ public class Main {
      * @param birthDate
      */
     public static void addMobileNumber(String phoneNumber, char gender, Date birthDate) {
-        MobileNumber mobNum = new MobileNumber(phoneNumber, gender, birthDate);//"m1991-02-17"
-        mobileNumberArray.add(mobNum);
-        Collections.sort(mobileNumberArray);
-        if (mobNum.getBirthDate() != null) {
-            frame.refreshLog("Mobile number " + mobNum.getPhoneNumber() + " (gender " + mobNum.getGender() + " bithday: " + mobNum.getBirthDateString() + ") has been added.");
-        } else {
-            frame.refreshLog("Mobile number " + mobNum.getPhoneNumber() + " has been added.");
+        boolean updated = false;
+        for (MobileNumber mobNumToCheck : mobileNumberArray) {
+            if (phoneNumber.equals(mobNumToCheck.getPhoneNumber())) {
+                //mobileNumberArray.remove(mobNumToCheck);
+
+                mobNumToCheck.setGender(gender);
+                if (birthDate != null)
+                    mobNumToCheck.setBirthDate(birthDate);
+
+                frame.refreshLog("Mobile number " + phoneNumber + " has been updated. New gender: " + gender + " New birth day: " + birthDate.toString());
+                updated = true;
+                break;
+            }
         }
-        respondentsRegistered = Main.mobileNumberArray.size();
-        frame.setRespondentsRegistered(Integer.toString(respondentsRegistered));
+        if (!updated) {
+            MobileNumber mobNum = new MobileNumber(phoneNumber, gender, birthDate);//"m1991-02-17"
+            mobileNumberArray.add(mobNum);
+            Collections.sort(mobileNumberArray);
+            if (mobNum.getBirthDate() != null) {
+                frame.refreshLog("Mobile number " + mobNum.getPhoneNumber() + " (gender " + mobNum.getGender() + " bithday: " + mobNum.getBirthDateString() + ") has been added.");
+            } else {
+                frame.refreshLog("Mobile number " + mobNum.getPhoneNumber() + " has been added.");
+            }
+            respondentsRegistered = Main.mobileNumberArray.size();
+            frame.setRespondentsRegistered(Integer.toString(respondentsRegistered));
+        }
 
     }
 
@@ -243,13 +258,13 @@ public class Main {
         try {
             if (!mobileNumbers.isEmpty()) {
                 for (InboundMessage mobNum : mobileNumbers) {
-                    for (MobileNumber mobNumToCheck : mobileNumberArray) {
-                        if (mobNum.getOriginator().equals(mobNumToCheck.getPhoneNumber())) {
-                            mobileNumberArray.remove(mobNumToCheck);
-                            frame.refreshLog("Mobile number " + mobNum.getOriginator() + " has been removed since new text was received from it.");
-                            break;
-                        }
-                    }
+//                    for (MobileNumber mobNumToCheck : mobileNumberArray) {
+//                        if (mobNum.getOriginator().equals(mobNumToCheck.getPhoneNumber())) {
+//                            mobileNumberArray.remove(mobNumToCheck);
+//                            frame.refreshLog("Mobile number " + mobNum.getOriginator() + " has been removed since new text was received from it.");
+//                            break;
+//                        }
+//                    }
                     if (!mobNum.getOriginator().isEmpty() || mobNum.getOriginator().contains("+")) {
 
                         //Checking if mobile number of a swender is in an array of numbers that need to be filtered Main.mobileNumbersToIgnore
@@ -449,10 +464,6 @@ public class Main {
                         //System.out.println("Message was not recognised.");
                         frame.refreshLog("Registration message was not recognised.");
                     }
-
-                    //System.out.println("MOBILE NUMBERS:");
-                    printMobileNumbers();
-
                 }
             }
 
@@ -532,7 +543,6 @@ public class Main {
                         //if mobile number has not been found in array of registered phone numbers - ignore
                         if (mobileNumberOriginator != null) {
                             addAnswer(answer.getText(), mobileNumberOriginator);
-                            printAnswers();
                         } else {
                             frame.refreshLog("Text message received from unknown number: " + answer.getOriginator());
                         }
@@ -544,32 +554,6 @@ public class Main {
             }
         } catch (Exception e) {
             //e.printStackTrace();
-        }
-    }
-
-    /**
-     * Debug function for outputting list of answers to the console
-     */
-    public static void printMobileNumbers() {
-        if (!mobileNumberArray.isEmpty()) {
-            for (MobileNumber mobNum : mobileNumberArray) {
-                //System.out.println(mobNum.getPhoneNumber() + " " + mobNum.getGender() + " " + mobNum.getBirthDateString());
-            }
-        } else {
-            //System.out.println("Mobile array is empty, pardon");
-        }
-    }
-
-    /**
-     * Debug function for outputting list of answers to the console
-     */
-    public static void printAnswers() {
-        if (!mobileNumberArray.isEmpty()) {
-            for (Answer ans : answerArray) {
-                //System.out.println(ans.getAnswer() + ans.getMobileNumberSentPhoneNumber());
-            }
-        } else {
-            //System.out.println("Mobile array is empty, pardon");
         }
     }
 

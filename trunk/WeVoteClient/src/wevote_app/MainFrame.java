@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-//TODO separate function for usinf file browser
 
 /*
  * MainFrame.java
@@ -107,7 +106,7 @@ public class MainFrame extends javax.swing.JFrame {
     private String[] getPollString(int topicID) {
         String[] pollString = new String[Main.topicArray.get(topicID).getPollArrayList().size()];
         for (int i = 0; i < Main.topicArray.get(topicID).getPollArrayList().size(); i++) {
-            pollString[i] = Integer.toString(i + 1) + ". " + Main.topicArray.get(topicID).getPollArrayList().get(i).getQuestion(); //TODO add answers
+            pollString[i] = Integer.toString(i + 1) + ". " + Main.topicArray.get(topicID).getPollArrayList().get(i).getQuestion();
         }
         return pollString;
     }
@@ -691,7 +690,6 @@ public class MainFrame extends javax.swing.JFrame {
 
 //        String question = jTextField1.getText();
 //        String options = jTextField2.getText();
-//        //TODO break string into options and add  all to arraylist
 //        //ArrayList<String> optionsArray = new ArrayList<String>();
 //        //optionsArray.add(options);
 //        Main.pollsArray.add(new Topic(question, options));
@@ -717,7 +715,6 @@ public class MainFrame extends javax.swing.JFrame {
             } catch (IOException e) {
             }
 
-            //TODO save session code with editable names of files
             int returnVal = fileChooser.showOpenDialog(this);
 
             if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -793,7 +790,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     @Action
     public void newSession() {
-        //TODO code for searching for duplicates of polls and mobile numbers
         SessionOperations.newSession();
         //System.out.println("MAKING A NEW SESSION");
 
@@ -1083,6 +1079,13 @@ public class MainFrame extends javax.swing.JFrame {
 
             //Sending current poll to mobile numbers from the array from Main
             //System.out.println("BEFORE SENDING");
+
+            Main.answersRegistered  = 0;
+
+            setAnswersReceived("0");
+            
+
+            //Main.answerArray = new ArrayList<Answer>();
 
             // current Topic and Poll. these are global vars that are unique for current poll
             Main.topicSent = Main.topicArray.get(currentTopicID);
