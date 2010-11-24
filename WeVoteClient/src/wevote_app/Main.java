@@ -130,19 +130,20 @@ public class Main {
 
 
         //find COM port with a modem
-        CommTest findPorts = new CommTest();
-        String[] commPortTest = findPorts.doIt();
-        try {
-            if (commPortTest.length != 0) {
-                if (!commPortTest[0].equals(" ")) {
-                    commPort = commPortTest[0];
-                }
-                if (!commPortTest[1].equals(" ")) {
-                    baud = Integer.parseInt(commPortTest[1]);
-                }
-            }
-        } catch (Exception e) {
-        }
+        //UNCOMMENT IT BEFORE TESTING. DOES NOT WORK WITHOUT COMM LIBRARY ON MAC OS. THAT IS WHY IT IS COMMENTED
+//        CommTest findPorts = new CommTest();
+//        String[] commPortTest = findPorts.doIt();
+//        try {
+//            if (commPortTest.length != 0) {
+//                if (!commPortTest[0].equals(" ")) {
+//                    commPort = commPortTest[0];
+//                }
+//                if (!commPortTest[1].equals(" ")) {
+//                    baud = Integer.parseInt(commPortTest[1]);
+//                }
+//            }
+//        } catch (Exception e) {
+//        }
         //System.out.println("COM: " + commPort);
         //System.out.println("BAUD: " + baud);
         baud = 57600; //TODO reason why it doesnt work with 19700
