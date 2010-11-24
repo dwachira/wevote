@@ -426,7 +426,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jButton6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                    .add(jButton5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(jButton5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jScrollPane4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 654, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -436,8 +436,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .add(jButton5)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jButton6)
-                .addContainerGap(116, Short.MAX_VALUE))
-            .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                .addContainerGap(144, Short.MAX_VALUE))
+            .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
         );
 
         jLabel3.setText("Signal:");
@@ -1170,6 +1170,8 @@ public class MainFrame extends javax.swing.JFrame {
     @Action
     public void clearMobileNumbers() {
         Main.mobileNumberArray = new ArrayList<MobileNumber>();
+        Main.respondentsRegistered = 0;
+        setRespondentsRegistered("0");
     }
 
     @Action
