@@ -1,0 +1,11 @@
+#summary Description of Graphical User Interface in the client side of the program.
+#labels client,GUI,swing
+
+= Introduction =
+
+Made with Swing library in Java.
+
+= Details =
+
+How it looks like in Mac OSX:
+[http://wevote.googlecode.com/svn-history/r24/trunk/WeVoteClient/additional_resources/MacOSXNov24.png]
