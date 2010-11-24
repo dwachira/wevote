@@ -1,0 +1,110 @@
+/* See also gxt-all.css, line 6830: .x-panel-body:
+background-color: #fff; —> background: url("../images/bg.png") repeat;*/
+
+body {
+    font-family: Arial;
+    font-size: 0.7em;
+    margin: 0em;
+    padding: 0em;
+    color: #203060;
+    cursor: default;
+}
+
+div.text {
+    background-color: #DFE8F6;
+    border-width: thin;
+    border-style: solid;
+    border-color: #7CA4D9;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 1em;
+    color: #233D6D;
+}
+
+div.title {
+    border-bottom-style: dashed;
+    border-width: thin;
+    border-color: #7CA4D9;
+    font-size: 1.5em;
+    text-align: left;
+}
+
+div.date {
+    font-size: 1.5em;
+    text-align: right;
+}
+
+div.error {
+    border-bottom-style: dashed;
+    border-width: thin;
+    border-color: red;
+    font-size: 1.5em;
+    text-align: left;
+    color: red;
+}
+
+div.menu {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-top-style: dashed;
+    border-bottom-style: dashed;
+    border-width: thin;
+    border-color: #7CA4D9;
+    width: 215px;
+    background: url("../images/bg_menu.png") repeat-y right;
+}
+
+div.logo {
+    height: 100%;
+    background: url("../images/bg_logo.png") repeat-x;
+}
+
+div.footer {
+    height: 100%;
+    padding-top: 1em;
+    text-align: center;
+    background: url("../images/bg_footer.png") repeat-x;
+}
+
+div.west {
+    height: 100%;
+    background: url("../images/bg_west.png") no-repeat bottom left;
+}
+
+div.east {
+    height: 100%;
+    background: url("../images/bg_east.png") no-repeat bottom right;
+}
+
+div.center {
+    padding: 1em;
+    background: url("../images/bg_center.png") repeat;
+}
+
+div.footer a:link {
+    color: #233D6D;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+div.footer a:visited {
+    color: #233D6D;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+div.footer a:hover {
+    color: #233D6D;
+    font-weight: bold;
+    border-bottom: dashed thin;
+}
+
+div.footer a:active {
+    color: #233D6D;
+    font-weight: bold;
+    border-bottom: solid thin;
+}
+
+img.img_logo {
+    padding-left: 2em;
+}
