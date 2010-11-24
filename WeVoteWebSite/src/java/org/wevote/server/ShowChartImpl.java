@@ -9,7 +9,6 @@ import org.json.simple.JSONArray;
 
 import java.util.Vector;
 
-
 /**
  * Retrives Chart info from database using MySQL.java
  *
