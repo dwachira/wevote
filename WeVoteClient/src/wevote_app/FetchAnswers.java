@@ -27,7 +27,7 @@ public class FetchAnswers implements Runnable {
                     break;
                 }
 
-                Thread.sleep(1000); //TODO choose sleep time
+                Thread.sleep(1000); 
             
             } catch (Exception ex) {
                 //ex.printStackTrace();

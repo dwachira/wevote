@@ -34,7 +34,7 @@ public class FetchMobiles implements Runnable {
                 mobPhones = readMsg.doIt(1);
                 Main.addMobileNumbersFromArrayList(mobPhones);
                 
-                Thread.sleep(5000); //TODO choose sleep time
+                Thread.sleep(5000); 
 
             } catch (Exception ex) {
                //ex.printStackTrace();
