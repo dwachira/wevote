@@ -148,8 +148,8 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `mobile_number` varchar(45) NOT NULL,
-  `age` tinyint(1) unsigned NOT NULL,
-  `gender` enum('male','female','unknown') NOT NULL DEFAULT 'unknown',
+  `age` datetime NOT NULL,
+  `gender` varchar(45) NOT NULL DEFAULT 'unknown',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=cp1251 ROW_FORMAT=DYNAMIC;
 
@@ -159,18 +159,18 @@ CREATE TABLE `user` (
 
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`,`mobile_number`,`age`,`gender`) VALUES 
- (1,'+79219899375',16,'male'),
- (2,'+358468151909',21,'male'),
- (3,'+911',20,'female'),
- (4,'+1',65,'female'),
- (5,'+2',50,'female'),
- (6,'+3',40,'male'),
- (7,'+4',30,'female'),
- (8,'+5',35,'male'),
- (9,'+6',54,'female'),
- (10,'+7',41,'male'),
- (11,'+8',17,'female'),
- (12,'+9',27,'male');
+ (1,'+79219899375','1989-00-00 00:00:00','male'),
+ (2,'+358468151909','1985-00-00 00:00:00','male'),
+ (3,'+911','1980-00-00 00:00:00','female'),
+ (4,'+1','1978-00-00 00:00:00','female'),
+ (5,'+2','1965-00-00 00:00:00','female'),
+ (6,'+3','1994-00-00 00:00:00','male'),
+ (7,'+4','1995-00-00 00:00:00','female'),
+ (8,'+5','1990-00-00 00:00:00','male'),
+ (9,'+6','1975-00-00 00:00:00','female'),
+ (10,'+7','1935-00-00 00:00:00','male'),
+ (11,'+8','1965-00-00 00:00:00','female'),
+ (12,'+9','1930-00-00 00:00:00','male');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 

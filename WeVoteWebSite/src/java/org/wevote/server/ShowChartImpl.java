@@ -63,7 +63,7 @@ public class ShowChartImpl extends RemoteServiceServlet implements ShowChart {
             for(int j = 0; j < resultUserAnswer.size(); j++) {
                 //Counts presented age of the time of question
                 //Time of pool - Time of birthday
-                //resultPool.get(0).get(1) - resultUser.get(l).get(0)
+                //resultPool.get(0).get(1) - resultUser.get(0).get(0)
 
                 Vector<Vector> resultUser = question.Select("SELECT age FROM user WHERE id = " + resultUserAnswer.get(j).get(0));
 
