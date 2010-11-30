@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Classname Topic (set of polls/questions) stands for Poll
  *
- * @author hollgam
+ * @author hollgam & NorthernDemon
  */
 public class Topic implements Serializable, Comparable<Topic> {
 
